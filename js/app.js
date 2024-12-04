@@ -1,6 +1,7 @@
-const weather = new Weather("تهران", "تهران");
-
 const ui = new UI();
+const storage = new Storage();
+const weatherLocation = storage.getLocationData();
+const weather = new Weather(weatherLocation.state, weatherLocation.city);
 
 document.addEventListener("DOMContentLoaded", getWeather);
 
@@ -13,6 +14,8 @@ async function changeLocation() {
   const state = document.getElementById("state").value;
 
   weather.changeLocation(state, city);
+
+  storage.setLocationData(city, state);
 
   getWeather();
 
